@@ -8,7 +8,8 @@
 		"preserveConstEnums": true,
 		"sourceMap": true,
 		"outDir": "build",
-		"rootDir": "src"
+		"rootDir": "src",
+		"strictNullChecks": true
 	},
 	"include": [
 		"src/**/*.ts"
