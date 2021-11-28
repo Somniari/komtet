@@ -2,9 +2,9 @@
   "name": "komtet",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./index.js",
   "scripts": {
-    "test": ""
+
   },
   "repository": {
     "type": "git",
@@ -14,10 +14,18 @@
     "komtet",
     "kassa"
   ],
-  "author": "Anastasia Borodina ",
+  "author": "Anastasia Borodina <feanor04@yandex.ru>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Somniari/komtet/issues"
   },
-  "homepage": "https://github.com/Somniari/komtet#readme"
+  "homepage": "https://github.com/Somniari/komtet#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "eslint": "^8.3.0",
+    "eslint-plugin-autofix": "^1.1.0",
+    "eslint-plugin-import": "^2.25.3",
+    "typescript": "^4.5.2"
+  }
 }
