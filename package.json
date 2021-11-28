@@ -1,0 +1,23 @@
+{
+  "name": "komtet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Somniari/komtet.git"
+  },
+  "keywords": [
+    "komtet",
+    "kassa"
+  ],
+  "author": "Anastasia Borodina ",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Somniari/komtet/issues"
+  },
+  "homepage": "https://github.com/Somniari/komtet#readme"
+}
