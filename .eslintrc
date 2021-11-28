@@ -1,0 +1,41 @@
+{
+	"root": true,
+	"extends": [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/recommended"
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": { "project": ["./tsconfig.json"] },
+	"plugins": [
+		"@typescript-eslint",
+		"autofix"
+	],
+	"rules": {
+		"@typescript-eslint/strict-boolean-expressions": [
+			2,
+			{
+				"allowString" : false,
+				"allowNumber" : false
+			}
+		],
+		"autofix/no-debugger": "error",
+		"max-len": [
+			"error",
+			{
+				"code": 150
+			}
+		],
+		"no-trailing-spaces": [
+			"error"
+		],
+		"autofix/newline-per-chained-call": [
+			"error",
+			{
+				"ignoreChainWithDepth": 1
+			}
+		]
+
+
+	},
+	"ignorePatterns": ["src/**/*.test.ts", "src/frontend/generated/*"]
+}
