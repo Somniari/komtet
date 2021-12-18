@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "./index.js",
-  "scripts": {
-
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Somniari/komtet.git"
@@ -21,6 +19,7 @@
   },
   "homepage": "https://github.com/Somniari/komtet#readme",
   "devDependencies": {
+    "@types/node": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "eslint": "^8.3.0",
