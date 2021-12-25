@@ -1,3 +1,5 @@
+import { OrderPosition } from "./OrderPosition";
+
 /**
  * Система налогообложения
  */
@@ -5,29 +7,43 @@ export enum TaxSystem {
 	common = 0, // Общая
 	simplifiedIn = 1, // Упрощённая (доходы)
 	simplifiedInOut = 2, // Упрощённая (доходы минут расходы)
-	utoii = 3, // ЕНВД - с 2020 года отменён, не использовать
-	ust = 4, // ??
+	ust = 4, // ЕСХН
 	patent = 5, // Патент
 }
 
-/**
- * Тип чека
- */
-export enum CheckType {
-	sell = 'sell',
-	sellReturn = 'sellReturn',
-	buy = 'buy',
-	buyReturn = 'buyReturn'
+export enum CheckIntent {
+    sell = 'sell', //  приход (используется при продаже товара или услуги)
+    sellReturn = 'sellReturn', // возврат прихода
+    sellCorrection = 'sellCorrection', // коррекция прихода
+    buy = 'buy', // расход (используется при выдаче клиенту денег из кассы)
+    buyReturn = 'buyReturn', // возврат расхода
+    buyCorrection = 'buyCorrection', // коррекция расхода
 }
 
-export type Check = {
-	id: number; // Уникальный идентификатор, который назначается самим магазином
-	userEmail: string; // E-mail, на который отправится чек
-	type: CheckType; // Тип чека
-	taxSystem: TaxSystem; // Система налогообложения
-	paymentPlace: string; // Место платежа - URL сайта
-	shouldPrint: boolean; // ??
-	payments: []; // Платежи
-	positions: []; // Товары
-	cashier: string; // ФИО кассира
+export class Check {
+    public intent: CheckIntent; // Направление платежа
+	public external_id: number; // Уникальный идентификатор, который назначается самим магазином
+	public sno: TaxSystem; // Система налогообложения
+	public user: string; // E-mail, на который отправится чек
+	public print = true; // нужно ли печатать
+	public positions: OrderPosition[] = []; // Товары
+	public payments: []; // Платежи
+	public cashier: string; // ФИО кассира
+	public payment_address: string; // Место платежа - URL сайта
+
+    constructor (
+        intent: CheckIntent,
+        idExternal: number,
+        sno: TaxSystem,
+        userContact: string,
+        paymentAddress: string,
+        cashier: string,
+    ) {
+        this.intent = intent;
+        this.external_id = idExternal;
+        this.sno = sno;
+        this.user = userContact;
+        this.payment_address = paymentAddress;
+        this.cashier = cashier;
+    }
 }
