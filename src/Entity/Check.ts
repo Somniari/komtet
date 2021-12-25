@@ -1,4 +1,5 @@
 import { OrderPosition } from "./OrderPosition";
+import { Payment } from "./Payment";
 
 /**
  * Система налогообложения
@@ -11,6 +12,9 @@ export enum TaxSystem {
 	patent = 5, // Патент
 }
 
+/**
+ * Вид чека
+ */
 export enum CheckIntent {
     sell = 'sell', //  приход (используется при продаже товара или услуги)
     sellReturn = 'sellReturn', // возврат прихода
@@ -27,7 +31,7 @@ export class Check {
 	public user: string; // E-mail, на который отправится чек
 	public print = true; // нужно ли печатать
 	public positions: OrderPosition[] = []; // Товары
-	public payments: []; // Платежи
+	public payments: Payment[] = []; // Платежи
 	public cashier: string; // ФИО кассира
 	public payment_address: string; // Место платежа - URL сайта
 
@@ -45,5 +49,13 @@ export class Check {
         this.user = userContact;
         this.payment_address = paymentAddress;
         this.cashier = cashier;
+    }
+
+    public addPosition(orderPosition: OrderPosition) {
+        this.positions.push(orderPosition)
+    }
+
+    public addPayment(payment: Payment) {
+        this.payments.push(payment)
     }
 }
