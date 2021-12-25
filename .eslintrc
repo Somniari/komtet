@@ -11,13 +11,6 @@
 		"autofix"
 	],
 	"rules": {
-		"@typescript-eslint/strict-boolean-expressions": [
-			2,
-			{
-				"allowString" : false,
-				"allowNumber" : false
-			}
-		],
 		"autofix/no-debugger": "error",
 		"max-len": [
 			"error",
@@ -34,8 +27,6 @@
 				"ignoreChainWithDepth": 1
 			}
 		]
-
-
 	},
 	"ignorePatterns": ["src/**/*.test.ts", "src/frontend/generated/*"]
 }
