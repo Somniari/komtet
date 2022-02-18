@@ -1,4 +1,6 @@
 import crypto from 'crypto';
+import axios from 'axios';
+
 import { Check } from './Check';
 
 export class Komtet {
@@ -18,28 +20,27 @@ export class Komtet {
     public async sendCheck(check: Check): Promise<boolean> {
         const signature = this.getSignature(check);
 
-        try {
-            const response = await fetch(
-                this.apiHost + this.apiPath + this.queue,
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': this.key,
-                        'X-HMAC-Signature': signature
-                    },
-                    body: JSON.stringify(check),
-                }
-            )
-
-            if (response.status === 200) {
-                return true;
-            } else {
-                return false;
+        const result = await axios({
+            method: 'POST',
+            url: this.apiHost + this.apiPath + this.queue,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': this.key,
+                'X-HMAC-Signature': signature
+            },
+            data: check,
+        })
+        .then(() => {
+            return true;
+        })
+        .catch((error) => {
+            if (error.response) {
+                console.log(`Не удалось отправить запрос; статус ответа: ${error.response.status} - ${error.response.statusText}`);
             }
-        } catch (e) {
             return false;
-        }
+        });
+
+        return result;
     }
 
     private getSignature(data: Check) {
