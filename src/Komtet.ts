@@ -24,6 +24,7 @@ export class Komtet {
             method: 'POST',
             url: this.apiHost + this.apiPath + this.queue,
             headers: {
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Authorization': this.key,
                 'X-HMAC-Signature': signature
@@ -35,7 +36,8 @@ export class Komtet {
         })
         .catch((error) => {
             if (error.response) {
-                console.log(`Не удалось отправить запрос; статус ответа: ${error.response.status} - ${error.response.statusText}`);
+                console.log(`Komtet error: ${error.response.status} - ${error.response.statusText}`);
+                console.log('Response data: ', error.response.data);
             }
             return false;
         });
@@ -44,7 +46,7 @@ export class Komtet {
     }
 
     private getSignature(data: Check) {
-    //   signature = hmac.new(secret.encode('utf-8'), msg.encode('utf-8'), digestmod=hashlib.md5).hexdigest()
+        // signature = hmac.new(secret.encode('utf-8'), msg.encode('utf-8'), digestmod=hashlib.md5).hexdigest()
         // # msg = method + uri + body
         // msg = 'GET' + 'https://kassa.komtet.ru/api/shop/v1/queues/125' + ''
         const msg = this.method + this.apiHost + this.apiPath + this.queue + JSON.stringify(data);
