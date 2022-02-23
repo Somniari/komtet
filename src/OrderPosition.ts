@@ -1,4 +1,4 @@
-export enum Vat {
+export enum VatT {
     no = 'no',
     rate_0 = '0',
     rate_10 = '10',
@@ -7,7 +7,7 @@ export enum Vat {
     rate_120 = '120',
 }
 
-export enum CalculationMethod {
+export enum CalculationMethodT {
     prePaymentFull = 'pre_payment_full',
     prePaymentPart = 'pre_payment_part',
     fullPayment = 'full_payment',
@@ -17,7 +17,7 @@ export enum CalculationMethod {
     credit = 'credit',
 }
 
-export enum CalculationSubject {
+export enum CalculationSubjectT {
     product = 'product', // товар, за исключением подакцизного товара
     productPractical = 'product_practical', // подакцизный товар
     work = 'work', // работа
@@ -38,6 +38,22 @@ export enum CalculationSubject {
     resortFee = 'resort_fee', // курортный сбор
 }
 
+export interface OrderPositionI {
+    name: string,
+    measure_name?: string,
+    price: number,
+    quantity: number,
+    total: number,
+    nomenclature_code?: {
+        code?: string,
+        hex_code?: string,
+    },
+    calculation_method: CalculationMethodT,
+    calculation_subject: CalculationSubjectT,
+    vat: VatT,
+    excise?: number, // Акциз
+}
+
 export class OrderPosition {
     private name: string;
     private measure_name = 'шт.';
@@ -48,32 +64,27 @@ export class OrderPosition {
         code?: string,
         hex_code?: string,
     };
-    private calculation_method: CalculationMethod;
-    private calculation_subject: CalculationSubject;
-    private vat: Vat; // НДС
+    private calculation_method: CalculationMethodT;
+    private calculation_subject: CalculationSubjectT;
+    private vat: VatT; // НДС
     private excise: number; // Акциз
 
-    constructor (data: {
-        name: string,
-        measure_name: string,
-        price: number,
-        quantity: number,
-        total: number,
-        nomenclature_code: {
-            code?: string,
-            hex_code?: string,
-        },
-        calculation_method: CalculationMethod,
-        calculation_subject: CalculationSubject,
-        vat: Vat,
-        excise?: number, // Акциз
-    }) {
+    constructor (data: OrderPositionI) {
         this.name = data.name;
+
+        if (data.measure_name) {
+            this.measure_name = data.measure_name
+        }
+
         this.measure_name = data.measure_name;
         this.price = data.price;
         this.quantity = data.quantity;
         this.total = data.total;
-        this.nomenclature_code = data.nomenclature_code;
+
+        if (data.nomenclature_code) {
+            this.nomenclature_code = data.nomenclature_code;
+        }
+
         this.calculation_method = data.calculation_method;
         this.calculation_subject = data.calculation_subject;
         this.vat = data.vat;
