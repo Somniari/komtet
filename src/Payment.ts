@@ -1,4 +1,4 @@
-export enum PaymentType {
+export enum PaymentTypeT {
     card = 'card', // оплата безналичными
     cash = 'cash', // оплата наличными
     prepayment = 'prepayment', // сумма предоплатой (зачет аванса и/или предыдущих платежей)
@@ -7,12 +7,7 @@ export enum PaymentType {
 
 }
 
-export class Payment {
-    private sum: number;
-    private type: PaymentType;
-
-    constructor(sum: number, type: PaymentType) {
-        this.sum = sum;
-        this.type = type;
-    }
+export interface PaymentI {
+    sum: number,
+    type: PaymentTypeT,
 }
