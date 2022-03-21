@@ -1,3 +1,6 @@
+/**
+ * Ставка НДС
+ */
 export enum VatT {
     no = 'no',
     rate_0 = '0',
@@ -7,6 +10,9 @@ export enum VatT {
     rate_120 = '120',
 }
 
+/**
+ * Способ расчёта
+ */
 export enum CalculationMethodT {
     prePaymentFull = 'pre_payment_full',
     prePaymentPart = 'pre_payment_part',
@@ -17,6 +23,9 @@ export enum CalculationMethodT {
     credit = 'credit',
 }
 
+/**
+ * Предмет расчёта
+ */
 export enum CalculationSubjectT {
     product = 'product', // товар, за исключением подакцизного товара
     productPractical = 'product_practical', // подакцизный товар
@@ -38,6 +47,9 @@ export enum CalculationSubjectT {
     resortFee = 'resort_fee', // курортный сбор
 }
 
+/**
+ * Позиция в чеке
+ */
 export interface OrderPositionI {
     name: string,
     measure_name?: string,
@@ -50,7 +62,7 @@ export interface OrderPositionI {
     },
     calculation_method: CalculationMethodT,
     calculation_subject: CalculationSubjectT,
-    vat: VatT,
+    vat: VatT, // НДС
     excise?: number, // Акциз
 }
 

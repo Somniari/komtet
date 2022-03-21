@@ -3,6 +3,9 @@ import axios from 'axios';
 
 import { Check } from './Check';
 
+/**
+ * Основная сущность
+ */
 export class Komtet {
     private method = 'POST';
     private apiHost = 'https://kassa.komtet.ru';
@@ -17,6 +20,9 @@ export class Komtet {
         this.queue = queue;
     }
 
+    /**
+     * Отправить чек
+     */
     public async sendCheck(check: Check): Promise<boolean> {
         const signature = this.getSignature(check);
 
@@ -45,9 +51,13 @@ export class Komtet {
         return result;
     }
 
+    /**
+     * Сгенерировать HMAC подпись
+     */
     private getSignature(data: Check) {
+        // Из API Komtet:
         // signature = hmac.new(secret.encode('utf-8'), msg.encode('utf-8'), digestmod=hashlib.md5).hexdigest()
-        // # msg = method + uri + body
+        // msg = method + uri + body
         // msg = 'GET' + 'https://kassa.komtet.ru/api/shop/v1/queues/125' + ''
         const msg = this.method + this.apiHost + this.apiPath + this.queue + JSON.stringify(data);
         return crypto.createHmac('md5', this.secret)
