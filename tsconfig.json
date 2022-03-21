@@ -9,7 +9,6 @@
 		"sourceMap": true,
 		"outDir": "build",
 		"rootDir": "src",
-		// "strictNullChecks": true
 	},
 	"include": [
 		"src/**/*.ts"
