@@ -4,7 +4,7 @@ import { PaymentI } from "./Payment";
 /**
  * Система налогообложения
  */
-export enum TaxSystemT {
+export declare enum TaxSystemT {
 	common = 0, // Общая
 	simplifiedIn = 1, // Упрощённая (доходы)
 	simplifiedInOut = 2, // Упрощённая (доходы минут расходы)
@@ -15,7 +15,7 @@ export enum TaxSystemT {
 /**
  * Вид чека
  */
-export enum CheckIntentT {
+export declare enum CheckIntentT {
     sell = 'sell', //  приход (используется при продаже товара или услуги)
     sellReturn = 'sellReturn', // возврат прихода
     sellCorrection = 'sellCorrection', // коррекция прихода
@@ -27,7 +27,7 @@ export enum CheckIntentT {
 /**
  * Чек
  */
-export interface CheckI {
+export declare interface CheckI {
     intent?: CheckIntentT,
     external_id: number,
     sno: TaxSystemT,
